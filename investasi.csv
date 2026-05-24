@@ -1,0 +1,251 @@
+No,Nama,Jenis,Return_Tahunan,Volatilitas,Likuiditas,Regulasi,Kemudahan_Modal
+1,Bitcoin (BTC),Crypto,65.4,58.2,5,3,5
+2,Ethereum (ETH),Crypto,42.1,52.0,5,3,5
+3,Solana (SOL),Crypto,120.5,75.4,4,2,5
+4,Cardano (ADA),Crypto,28.2,62.1,4,2,5
+5,Ripple (XRP),Crypto,15.4,59.0,4,3,5
+6,Polkadot (DOT),Crypto,22.1,64.3,3,2,5
+7,Dogecoin (DOGE),Crypto,85.3,92.1,4,2,5
+8,Avalanche (AVAX),Crypto,55.0,70.2,3,2,5
+9,Chainlink (LINK),Crypto,34.6,55.1,3,3,5
+10,Polygon (MATIC),Crypto,18.9,61.4,4,2,5
+11,Saham BBCA,Saham,12.5,14.2,5,5,3
+12,Saham BBRI,Saham,10.8,16.5,5,5,3
+13,Saham TLKM,Saham,6.4,18.1,4,5,4
+14,Saham ASII,Saham,8.2,21.3,4,5,3
+15,Saham BMRI,Saham,14.1,15.2,5,5,3
+16,Saham BBNI,Saham,11.3,17.0,4,5,3
+17,Saham UNVR,Saham,-4.5,19.2,4,5,4
+18,Saham ICBP,Saham,9.5,13.8,4,5,3
+19,Saham INDF,Saham,7.2,14.5,4,5,3
+20,Saham AMRT,Saham,18.3,22.4,4,5,3
+21,Emas Antam Fisik,Emas,11.2,8.5,3,5,2
+22,Emas UBS Fisik,Emas,11.0,8.6,3,5,2
+23,Emas Digital Pegadaian,Emas,10.9,8.5,4,5,5
+24,Emas Digital Tokopedia,Emas,10.8,8.7,4,5,5
+25,Emas Digital Pluang,Emas,10.8,8.6,4,5,5
+26,Reksadana Sucorinvest Equity,Reksa Dana,16.4,14.5,4,5,5
+27,Reksadana Mandiri Pasar Uang,Reksa Dana,4.8,1.1,5,5,5
+28,Reksadana Batavia Dana Saham,Reksa Dana,11.2,13.8,4,5,5
+29,Reksadana Manulife Pendapatan Tetap,Reksa Dana,6.5,3.2,4,5,5
+30,Reksadana BNP Paribas Pesona,Reksa Dana,13.1,15.0,4,5,5
+31,Binance Coin (BNB),Crypto,48.2,50.1,5,3,5
+32,Shiba Inu (SHIB),Crypto,95.4,110.5,4,2,5
+33,Litecoin (LTC),Crypto,14.2,48.3,4,3,5
+34,Uniswap (UNI),Crypto,25.6,58.9,3,2,5
+35,Stellar (XLM),Crypto,12.1,51.4,4,3,5
+36,Saham GOTO,Saham,-22.4,45.2,5,5,5
+37,Saham Bukalapak (BUKA),Saham,-12.1,38.4,4,5,5
+38,Saham Adaro Energy (ADRO),Saham,25.3,28.1,4,5,4
+39,Saham PTBA,Saham,22.1,26.4,4,5,3
+40,Saham PGAS,Saham,5.4,22.1,4,5,4
+41,Emas Digital Indogold,Emas,10.7,8.5,4,5,5
+42,Emas Digital Sakumas,Emas,10.6,8.8,4,5,5
+43,Reksadana Schroders Dana Prestasi,Reksa Dana,9.8,12.4,4,5,5
+44,Reksadana Ashmore Dana Ekuitas,Reksa Dana,14.2,16.1,4,5,5
+45,Reksadana Danareksa Mawar,Reksa Dana,8.7,11.9,4,5,5
+46,Cosmos (ATOM),Crypto,31.2,63.4,3,2,5
+47,Monero (XMR),Crypto,18.4,44.1,3,2,5
+48,Saham BRPT,Saham,15.6,32.4,4,5,4
+49,Saham TPIA,Saham,42.1,35.8,4,5,3
+50,Reksadana Syailendra Pasar Uang,Reksa Dana,4.9,1.0,5,5,5
+51,TRON (TRX),Crypto,19.2,41.5,4,3,5
+52,Toncoin (TON),Crypto,78.4,66.2,4,2,5
+53,Shiba Inu (SHIB) V2,Crypto,62.1,98.4,3,2,5
+54,Saham KLBF,Saham,5.8,12.4,4,5,3
+55,Saham MYOR,Saham,11.2,16.2,4,5,3
+56,Saham CPIN,Saham,7.4,19.5,4,5,3
+57,Emas Logam Mulia Galeri 24,Emas,11.1,8.5,3,5,2
+58,Emas Digital Bareksa,Emas,10.8,8.6,4,5,5
+59,Reksadana BNI-AM Dana Likuid,Reksa Dana,4.7,1.2,5,5,5
+60,Reksadana Trim Kapital,Reksa Dana,12.4,14.1,4,5,5
+61,Solana Eco Token,Crypto,88.1,82.4,3,2,5
+62,Avalanche Eco Token,Crypto,44.2,71.0,3,2,5
+63,Saham ANTM,Saham,14.2,28.4,4,5,4
+64,Saham INCO,Saham,9.5,25.1,4,5,4
+65,Saham MDKA,Saham,18.4,31.2,4,5,4
+66,Saham BRMS,Saham,22.5,42.1,4,5,5
+67,Emas Koin Dinar,Emas,12.1,9.2,2,5,1
+68,Emas Perhiasan 24K,Emas,9.2,10.5,4,4,2
+69,Reksadana Eastspring Cash,Reksa Dana,4.6,1.1,5,5,5
+70,Reksadana Bahana Dana Prima,Reksa Dana,10.5,13.2,4,5,5
+71,Near Protocol (NEAR),Crypto,52.3,68.4,3,2,5
+72,Arbitrum (ARB),Crypto,33.1,64.2,4,2,5
+73,Optimism (OP),Crypto,45.6,67.1,4,2,5
+74,Saham UNTR,Saham,16.4,18.5,4,5,3
+75,Saham ITMG,Saham,28.1,24.2,4,5,3
+76,Saham HRUM,Saham,19.2,29.4,4,5,4
+77,Emas Digital Treasury,Emas,10.7,8.6,4,5,5
+78,Emas Lokal Pasar,Emas,9.5,9.0,3,4,2
+79,Reksadana Principal Cash,Reksa Dana,4.5,1.3,5,5,5
+80,Reksadana Panin Dana Maksima,Reksa Dana,7.2,15.4,4,5,5
+81,Aptos (APT),Crypto,58.2,72.4,3,2,5
+82,Sui (SUI),Crypto,89.4,78.1,3,2,5
+83,Saham AKRA,Saham,14.5,17.2,4,5,4
+84,Saham MEDC,Saham,32.1,38.4,4,5,4
+85,Saham PGAS Sub,Saham,4.2,21.5,3,5,4
+86,Saham RAJA,Saham,45.2,52.1,3,5,5
+87,Emas Batangan Lokal,Emas,10.2,8.8,3,4,2
+88,Emas Kuno Koleksi,Emas,15.2,12.4,1,4,1
+89,Reksadana Sinarmas MSAM,Reksa Dana,5.1,1.2,4,5,5
+90,Reksadana Manulife Saham,Reksa Dana,15.2,15.1,4,5,5
+91,Render Token (RNDR),Crypto,142.1,88.2,3,2,5
+92,The Graph (GRT),Crypto,26.4,63.1,3,2,5
+93,Saham BBCA Ekuitas,Saham,12.4,14.1,5,5,3
+94,Saham BBRI Ekuitas,Saham,10.7,16.4,5,5,3
+95,Saham TLKM Ekuitas,Saham,6.3,18.0,4,5,4
+96,Saham ASII Ekuitas,Saham,8.1,21.2,4,5,3
+97,Saham BMRI Ekuitas,Saham,14.0,15.1,5,5,3
+98,Saham BBNI Ekuitas,Saham,11.2,16.9,4,5,3
+99,Saham UNVR Ekuitas,Saham,-4.6,19.1,4,5,4
+100,Saham ICBP Ekuitas,Saham,9.4,13.7,4,5,3
+101,Fantom (FTM),Crypto,64.2,69.1,3,2,5
+102,Injective (INJ),Crypto,112.4,81.3,3,2,5
+103,Saham INDF Ekuitas,Saham,7.1,14.4,4,5,3
+104,Saham AMRT Ekuitas,Saham,18.2,22.3,4,5,3
+105,Emas Antam Premium,Emas,11.3,8.4,3,5,2
+106,Emas UBS Premium,Emas,11.1,8.5,3,5,2
+107,Emas Digital Pegadaian B,Emas,11.0,8.4,4,5,5
+108,Emas Digital Tokopedia B,Emas,10.9,8.6,4,5,5
+109,Emas Digital Pluang B,Emas,10.9,8.5,4,5,5
+110,Reksadana Sucorinvest B,Reksa Dana,16.5,14.4,4,5,5
+111,Hedera (HBAR),Crypto,21.4,54.2,3,2,5
+112,Veachain (VET),Crypto,17.5,56.3,3,2,5
+113,Saham GOTO Ekuitas,Saham,-22.5,45.1,5,5,5
+114,Saham BUKA Ekuitas,Saham,-12.2,38.3,4,5,5
+115,Saham ADRO Ekuitas,Saham,25.2,28.0,4,5,4
+116,Saham PTBA Ekuitas,Saham,22.0,26.3,4,5,3
+117,Saham PGAS Ekuitas,Saham,5.3,22.0,4,5,4
+118,Emas Digital Indogold B,Emas,10.8,8.4,4,5,5
+119,Emas Digital Sakumas B,Emas,10.7,8.7,4,5,5
+120,Reksadana Schroders B,Reksa Dana,9.9,12.3,4,5,5
+121,Theta Network (THETA),Crypto,38.5,62.1,3,2,5
+122,Filecoin (FIL),Crypto,12.4,66.4,3,2,5
+123,Saham BRPT Ekuitas,Saham,15.5,32.3,4,5,4
+124,Saham TPIA Ekuitas,Saham,42.0,35.7,4,5,3
+125,Emas Logam Mulia B,Emas,11.2,8.4,3,5,2
+126,Emas Digital Bareksa B,Emas,10.9,8.5,4,5,5
+127,Reksadana BNI-AM B,Reksa Dana,4.8,1.1,5,5,5
+128,Reksadana Trim Kapital B,Reksa Dana,12.5,14.0,4,5,5
+129,Saham ANTM Ekuitas,Saham,14.1,28.3,4,5,4
+130,Saham INCO Ekuitas,Saham,9.4,25.0,4,5,4
+131,Maker (MKR),Crypto,55.2,59.1,3,2,5
+132,Aave (AAVE),Crypto,41.3,61.2,4,2,5
+133,Saham MDKA Ekuitas,Saham,18.3,31.1,4,5,4
+134,Saham BRMS Ekuitas,Saham,22.4,42.0,4,5,5
+135,Emas Koin Dinar B,Emas,12.2,9.1,2,5,1
+136,Emas Perhiasan 24K B,Emas,9.3,10.4,4,4,2
+137,Reksadana Eastspring B,Reksa Dana,4.7,1.0,5,5,5
+138,Reksadana Bahana B,Reksa Dana,10.6,13.1,4,5,5
+139,Saham UNTR Ekuitas,Saham,16.3,18.4,4,5,3
+140,Saham ITMG Ekuitas,Saham,28.0,24.1,4,5,3
+141,Algorand (ALGO),Crypto,9.5,53.4,3,2,5
+142,Flow (FLOW),Crypto,15.2,60.1,3,2,5
+143,Saham HRUM Ekuitas,Saham,19.1,29.3,4,5,4
+144,Emas Digital Treasury B,Emas,10.8,8.5,4,5,5
+145,Emas Lokal Pasar B,Emas,9.6,8.9,3,4,2
+146,Reksadana Principal B,Reksa Dana,4.6,1.2,5,5,5
+147,Reksadana Panin B,Reksa Dana,7.3,15.3,4,5,5
+148,Saham AKRA Ekuitas,Saham,14.4,17.1,4,5,4
+149,Saham MEDC Ekuitas,Saham,32.0,38.3,4,5,4
+150,Saham RAJA Ekuitas,Saham,45.1,52.0,3,5,5
+151,Quant (QNT),Crypto,22.4,49.5,3,2,5
+152,Gala (GALA),Crypto,68.1,89.4,4,2,5
+153,Saham SMGR,Saham,5.2,19.4,4,5,3
+154,Saham INTP,Saham,6.8,18.2,4,5,3
+155,Saham JSMR,Saham,14.2,21.5,4,5,3
+156,Saham WIKA,Saham,-35.2,58.4,3,5,5
+157,Emas Murni 999,Emas,11.4,8.5,3,5,2
+158,Emas Batangan UBS,Emas,11.0,8.5,3,5,2
+159,Reksadana Ashmore Top,Reksa Dana,13.8,15.4,4,5,5
+160,Reksadana Mandiri Top,Reksa Dana,5.0,1.1,5,5,5
+161,Chiliz (CHZ),Crypto,24.2,65.1,4,2,5
+162,Axie Infinity (AXS),Crypto,15.4,74.2,3,2,5
+163,Saham PSSI,Saham,18.4,24.1,3,5,4
+164,Saham TMAS,Saham,25.2,33.4,3,5,4
+165,Saham SMDR,Saham,11.5,29.1,4,5,4
+166,Saham BIRD,Saham,9.2,18.4,4,5,4
+167,Emas Lokal Pegadaian,Emas,10.9,8.5,4,5,5
+168,Emas Antam GiftSeries,Emas,10.5,8.5,2,5,5
+169,Reksadana Sucorinvest Flexi,Reksa Dana,14.2,12.1,4,5,5
+170,Reksadana Syailendra Fixed,Reksa Dana,7.2,3.5,4,5,5
+171,Tezos (XTZ),Crypto,11.5,54.1,3,2,5
+172,Sandbox (SAND),Crypto,32.4,72.5,4,2,5
+173,Saham BBTN,Saham,4.5,18.2,4,5,3
+174,Saham BDMN,Saham,6.2,15.4,4,5,3
+175,Saham BNGA,Saham,14.5,16.1,4,5,4
+176,Saham MEGA,Saham,8.1,13.2,3,5,3
+177,Emas Digital Pluang C,Emas,10.7,8.6,4,5,5
+178,Emas Digital Lakuemas,Emas,10.6,8.7,4,5,5
+179,Reksadana Manulife Dana Kas,Reksa Dana,4.6,0.9,5,5,5
+180,Reksadana Batavia Kas,Reksa Dana,4.7,1.0,5,5,5
+181,Decentraland (MANA),Crypto,28.5,70.1,4,2,5
+182,EOS (EOS),Crypto,5.2,51.4,3,2,5
+183,Saham ADHI,Saham,-18.2,44.2,3,5,5
+184,Saham PTPP,Saham,-12.4,39.1,3,5,5
+185,Saham TOTAL,Saham,15.2,22.4,3,5,4
+186,Saham ACES,Saham,11.4,24.5,4,5,4
+187,Emas Batangan Antam 10g,Emas,11.3,8.4,4,5,2
+188,Emas Batangan Antam 50g,Emas,11.5,8.3,4,5,1
+189,Reksadana Schroder Dana Kas,Reksa Dana,4.5,0.9,5,5,5
+190,Reksadana BNI-AM Pasar Uang,Reksa Dana,4.8,1.0,5,5,5
+191,Aave V2 (AAVE),Crypto,38.2,60.4,3,2,5
+192,Synthetix (SNX),Crypto,44.1,72.1,3,2,5
+193,Saham MAPI,Saham,22.4,28.1,4,5,4
+194,Saham MAPA,Saham,26.5,31.4,3,5,4
+195,Saham ERAA,Saham,4.2,25.2,4,5,4
+196,Saham LPPF,Saham,-15.4,41.2,4,5,4
+197,Emas UBS 5g,Emas,11.0,8.5,3,5,2
+198,Emas UBS 25g,Emas,11.2,8.4,3,5,1
+199,Reksadana Eastspring Pasar Uang,Reksa Dana,4.9,0.9,5,5,5
+200,Reksadana Trimegah Kas,Reksa Dana,5.1,1.1,5,5,5
+201,Fantom V2,Crypto,59.4,67.2,3,2,5
+202,Curve DAO (CRV),Crypto,12.5,68.4,3,2,5
+203,Saham EXCL,Saham,8.5,21.4,4,5,3
+204,Saham ISAT,Saham,34.2,26.5,4,5,3
+205,Saham FREN,Saham,-40.0,72.1,4,5,5
+206,Saham TLKM Sub,Saham,6.2,18.2,4,5,4
+207,Emas Tamasia,Emas,10.5,8.8,3,5,5
+208,Emas Jejak,Emas,10.4,8.9,3,4,5
+209,Reksadana Bahana Kas,Reksa Dana,4.7,1.0,5,5,5
+210,Reksadana Danareksa Kas,Reksa Dana,4.6,1.0,5,5,5
+211,Lido DAO (LDO),Crypto,71.2,74.5,3,2,5
+212,Rocket Pool (RPL),Crypto,48.5,69.2,3,2,5
+213,Saham TOWR,Saham,4.2,16.5,4,5,4
+214,Saham TBIG,Saham,5.8,19.2,4,5,4
+215,Saham MTEL,Saham,7.1,14.2,4,5,4
+216,Saham BTPS,Saham,-14.2,32.4,4,5,4
+217,Emas Bullion,Emas,11.6,8.2,2,5,1
+218,Emas MiniGold,Emas,9.8,8.8,3,4,5
+219,Reksadana Sucorinvest Sukuk,Reksa Dana,7.4,2.5,4,5,5
+220,Reksadana Mandiri Obligasi,Reksa Dana,6.8,2.8,4,5,5
+221,Frax Share (FXS),Crypto,33.2,71.4,3,2,5
+222,Loopring (LRC),Crypto,21.5,64.2,3,2,5
+223,Saham KLBF Sub,Saham,5.7,12.5,4,5,3
+224,Saham SIDO,Saham,12.4,18.2,4,5,4
+225,Saham KAEF,Saham,-25.4,48.2,3,5,4
+226,Saham INAF,Saham,-32.1,52.4,3,5,4
+227,Emas Logam Mulia 1g,Emas,11.0,8.5,4,5,3
+228,Emas Logam Mulia 5g,Emas,11.2,8.4,4,5,2
+229,Reksadana Schroders Sukuk,Reksa Dana,7.1,2.4,4,5,5
+230,Reksadana Manulife Obligasi Negara,Reksa Dana,6.2,2.1,4,5,5
+231,Enjin Coin (ENJ),Crypto,18.4,66.2,4,2,5
+232,Gnosis (GNO),Crypto,25.1,54.1,3,2,5
+233,Saham ADRO Sub,Saham,25.1,28.2,4,5,4
+234,Saham PTBA Sub,Saham,22.2,26.2,4,5,3
+235,Saham ITMG Sub,Saham,27.9,24.3,4,5,3
+236,Saham BUMI,Saham,50.0,78.2,5,5,5
+237,Emas UBS 1g,Emas,10.8,8.6,4,5,3
+238,Emas Antam 0.5g,Emas,10.2,8.5,4,5,4
+239,Reksadana BNP Paribas Obligasi,Reksa Dana,6.9,2.6,4,5,5
+240,Reksadana Batavia Obligasi,Reksa Dana,6.4,2.3,4,5,5
+241,Basic Attention Token (BAT),Crypto,14.5,51.2,4,3,5
+242,0x (ZRX),Crypto,22.1,58.4,3,2,5
+243,Saham UNVR Sub,Saham,-4.4,19.3,4,5,4
+244,Saham ICBP Sub,Saham,9.6,13.6,4,5,3
+245,Saham INDF Sub,Saham,7.3,14.6,4,5,3
+246,Saham MYOR Sub,Saham,11.1,16.3,4,5,3
+247,Emas Digital Treasury C,Emas,10.6,8.7,4,5,5
+248,Emas Digital Pegadaian C,Emas,10.8,8.5,4,5,5
+249,Reksadana Syailendra Campuran,Reksa Dana,11.4,8.5,4,5,5
+250,Reksadana Sucorinvest Anak Bangsa,Reksa Dana,14.5,13.1,4,5,5
