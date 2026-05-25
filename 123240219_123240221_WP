@@ -1,0 +1,630 @@
+# ============================================================
+# SPK INVESTASI - METODE WEIGHTED PRODUCT (WP)
+# ============================================================
+
+# Import library yang dibutuhkan
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# ─────────────────────────────────────────────────────────────
+# PENGATURAN HALAMAN
+# ─────────────────────────────────────────────────────────────
+st.set_page_config(
+    page_title="SPK Investasi - Weighted Product",
+    layout="wide"
+)
+
+st.markdown("""
+<style>
+
+    div[role="radiogroup"] label{
+        border-radius:10px;
+        padding: 10px 15px;
+        margin-bottom:8px;
+        background-color:#0e1117;
+        width: 100%;
+        display: flex;
+    }
+            
+    [data-testid="stMetric"] {
+        background: linear-gradient(135deg, #2f3240, #272933);
+        border-radius: 10px;
+        padding: 15px;
+    }
+            
+    div.stButton > button {
+        background-color: #272933;
+        color: white;
+        border-radius: 10px;
+        border: 1px solid #272933;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+    }
+
+    div.stButton > button:hover {
+        background-color: #008000;
+        color: white;
+        border: 1px solid #008000;
+    }
+
+    .banner {
+        background: linear-gradient(135deg, #2f3240, #272933);
+        border-radius: 10px;
+        padding: 15px 15px;
+        margin-bottom: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .info-box {
+        background: linear-gradient(135deg, #2f3240, #45495c);
+        padding:15px;
+        border-radius:10px;
+        margin-top: 5px;
+        margin-bottom: 16px;      
+    }    
+
+    .formula-box{
+        background: linear-gradient(135deg, #2f3240, #45495c);
+        padding:20px;
+        border-radius:10px;
+        border:1px solid #30363d;
+        margin-top: 5px;
+        margin-bottom: 16px;
+
+        color:#e6edf3;
+        font-family:monospace;
+
+        white-space: nowrap;
+        overflow-x:auto;
+    }
+
+</style>
+""", unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────
+# KONFIGURASI KRITERIA
+# ─────────────────────────────────────────────────────────────
+KRITERIA_COLS  = ["Return_Tahunan", "Volatilitas", "Likuiditas", "Regulasi", "Kemudahan_Modal"]
+KRITERIA_LABEL = ["Return Tahunan", "Volatilitas", "Likuiditas", "Regulasi", "Kemudahan Modal"]
+
+# "benefit" = makin besar makin baik
+# "cost"    = makin kecil makin baik
+KRITERIA_TIPE  = ["benefit", "cost", "benefit", "benefit", "benefit"]
+
+# ─────────────────────────────────────────────────────────────
+# SIDEBAR (Panel Kiri)
+# ─────────────────────────────────────────────────────────────
+with st.sidebar:
+    st.markdown("""
+    <div style='text-align:center; padding: 1px 0 8px 0;'>
+        <div style='font-size:5rem;'>↗</div>
+        <div style='font-size:1.35rem; font-weight:700; color:#e8f4fd; margin-top:4px;'>InvestSmart SPK</div>
+        <div style='font-size:0.75rem; color:#7aa8d2;'>Metode: Weighted Product (WP)</div>
+    </div>
+    <hr>
+    """, unsafe_allow_html=True)
+
+    # Upload file CSV
+    st.subheader("🖿 Upload Data CSV")
+    uploaded_file = st.file_uploader("",type=["csv"])
+    st.divider()
+
+    # Menu navigasi halaman
+    nav = st.radio(
+        "Pilih Halaman:", ["🏠︎ Beranda", "🖿 Dataset", "⚙︎ Hitung SPK", "↗ Visualisasi", "☻ Profil Kelompok"]
+    )
+
+# ─────────────────────────────────────────────────────────────
+# FUNGSI BANTU
+# ─────────────────────────────────────────────────────────────
+
+def baca_csv(file):
+    """Fungsi untuk membaca file CSV yang diupload."""
+    try:
+        df = pd.read_csv(file)
+        return df
+    except Exception as e:
+        st.error(f"Gagal membaca file: {e}")
+        return None
+
+def cek_kolom(df):
+    """Fungsi untuk memastikan kolom CSV sesuai yang dibutuhkan."""
+    kolom_wajib = ["Nama", "Jenis"] + KRITERIA_COLS
+    kolom_kurang = [k for k in kolom_wajib if k not in df.columns]
+    if kolom_kurang:
+        st.error(f"Kolom berikut tidak ditemukan: {', '.join(kolom_kurang)}")
+        return False
+    return True
+
+# ─────────────────────────────────────────────────────────────
+# HALAMAN PROFIL KELOMPOK
+# ─────────────────────────────────────────────────────────────
+if nav == "☻ Profil Kelompok":
+    st.title("☻Profil Kelompok")
+    st.divider()
+
+    col_info1, col_info2 = st.columns(2)
+    with col_info1:
+        st.subheader("Informasi Proyek")
+        st.write("**Judul:** SPK Analisis Aset Investasi Digital")
+        st.write("**Metode:** Weighted Product (WP)")
+        st.write("**Tema:** Finansial & Investasi")
+    with col_info2:
+        st.subheader("Informasi Akademik")
+        st.write("**Mata Kuliah:** Sistem Cerdas dan Pendukung Keputusan")
+        st.write("**Semester:** 4")
+        st.write("**Framework:** Python + Streamlit")
+
+    st.divider()
+    st.subheader("☻ Anggota Kelompok")
+
+    # =====================================================
+    # GANTI DATA INI DENGAN NAMA & NIM ANGGOTA KELOMPOK!
+    # =====================================================
+    anggota = [
+        {"nama": "Rizqy Wildan Azka", "nim": "123240219", "emoji": "🤴"},
+        {"nama": "Adiel Khairullah", "nim": "123240221", "emoji": "🤴"},
+    ]
+    # =====================================================
+
+    kolom_anggota = st.columns(len(anggota))
+    for col, a in zip(kolom_anggota, anggota):
+        with col:
+            st.markdown(f"### {a['emoji']}")
+            st.write(f"**{a['nama']}**")
+            st.caption(a["nim"])
+
+    st.stop()
+
+# ─────────────────────────────────────────────────────────────
+# CEK FILE CSV
+# ─────────────────────────────────────────────────────────────
+
+if uploaded_file is None:
+    # Belum ada file yang diupload
+    st.title("🏠︎ SPK Investasi — Weighted Product")
+    
+    st.markdown("""
+    <div class='banner'>
+        <div class='banner-title'>⬅ Silakan upload file CSV kamu di sidebar kiri!</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.subheader("Format CSV yang Dibutuhkan")
+    # Tampilkan contoh format CSV
+    contoh = pd.DataFrame({
+        "Nama":            ["Bitcoin", "BBCA", "Emas 24K"],
+        "Jenis":           ["Crypto", "Saham", "Emas"],
+        "Return_Tahunan":  [85.5, 12.3, 8.7],
+        "Volatilitas":     [70.2, 15.4, 5.1],
+        "Likuiditas":      [5, 4, 3],
+        "Regulasi":        [2, 5, 5],
+        "Kemudahan_Modal": [4, 4, 3],
+    })
+    st.dataframe(contoh, use_container_width=True, hide_index=True)
+
+    # Tombol download contoh CSV
+    st.download_button(
+        label="⬇️ Download Contoh CSV",
+        data=contoh.to_csv(index=False),
+        file_name="contoh_investasi.csv",
+        mime="text/csv"
+    )
+    st.stop()  # Hentikan program, tunggu user upload file
+
+# Ada file yang diupload → baca dan validasi
+df_raw = baca_csv(uploaded_file)
+if df_raw is None:
+    st.stop()
+if not cek_kolom(df_raw):
+    st.stop()
+
+# Kalau sampai sini, data sudah siap dipakai
+st.sidebar.success(f"Data berhasil dimuat! ({len(df_raw)} baris)")
+JENIS_LIST = sorted(df_raw["Jenis"].unique().tolist())
+
+# ─────────────────────────────────────────────────────────────
+# HALAMAN 1: BERANDA
+# ─────────────────────────────────────────────────────────────
+if nav == "🏠︎ Beranda":
+    st.title("🏠︎ SPK Investasi Digital")
+    st.subheader("Metode Weighted Product (WP)")
+    st.divider()
+
+    # Statistik ringkas data yang diupload
+    col1, col2, col3, col4 = st.columns(4)
+    with col1: st.metric("Total Data",   f"{len(df_raw):,} baris",        f"{len(df_raw)} records")
+    with col2: st.metric("Total Aset",   f"{df_raw['Nama'].nunique()}",    "alternatif")
+    with col3: st.metric("Kriteria SPK", f"{len(KRITERIA_COLS)} kriteria", "WP Method")
+    with col4: st.metric("Jenis Aset",   f"{df_raw['Jenis'].nunique()} jenis", "kategori")
+
+    st.markdown("---")
+    
+    col_kiri, col_kanan = st.columns(2)
+    with col_kiri:
+        st.subheader("Tentang Aplikasi")
+        st.markdown("""
+        <div class='info-box'>
+        <p>Aplikasi ini adalah Sistem Pendukung Keputusan (SPK)
+        yang membantu investor memilih aset investasi digital terbaik.</p>
+        <p>Menggunakan Metode Weighted Product (WP):
+        setiap aset dihitung skor-nya berdasarkan bobot kriteria yang bisa kamu atur sendiri,
+        lalu diurutkan dari yang terbaik.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.subheader("Rumus Weighted Product")
+        st.markdown("""
+        <div class='formula-box'>
+
+        LANGKAH 1 — Normalisasi Bobot:<br>
+        &nbsp; W_j = w_j / total_bobot   ← total bobot menjadi 1.0<br><br>
+
+        LANGKAH 2 — Hitung Vektor S:<br>
+        &nbsp; Benefit → S_i *= nilai ^ (+W_j)   ← makin besar makin baik<br>
+        &nbsp; Cost    → S_i *= nilai ^ (-W_j)   ← makin kecil makin baik<br><br>
+
+        LANGKAH 3 — Hitung Nilai V (Preferensi):<br>
+        &nbsp; V_i = S_i / jumlah_semua_S        ← skor akhir 0–1<br><br>
+
+        LANGKAH 4 — Ranking:<br>
+        &nbsp; V_i terbesar → Peringkat 1 (TERBAIK)
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_kanan:
+        st.subheader("Distribusi Jenis Aset")
+        # Grafik pie distribusi jenis aset
+        distribusi = df_raw["Jenis"].value_counts()
+        fig, ax = plt.subplots(figsize=(5, 4), facecolor="none")
+        autotexts = ax.pie(
+            distribusi.values,
+            labels=distribusi.index,
+            autopct='%1.1f%%',
+            startangle=90,
+            textprops=dict(color='#b0c9e8', fontsize=10)
+        )
+        ax.set_title("Komposisi Jenis Aset", color="#e8f4fd", fontsize=11, fontweight='bold', pad=14)
+        st.pyplot(fig)
+        plt.close()
+
+    st.subheader("Daftar Kriteria")
+    tabel_kriteria = pd.DataFrame({
+        "Kriteria": KRITERIA_LABEL,
+        "Tipe":     ["✅ Benefit" if t == "benefit" else "❌ Cost" for t in KRITERIA_TIPE],
+    })
+    st.dataframe(tabel_kriteria, use_container_width=True, hide_index=True)
+
+# ─────────────────────────────────────────────────────────────
+# HALAMAN 2: DATASET
+# ─────────────────────────────────────────────────────────────
+elif nav == "🖿 Dataset":
+    st.title("🖿 Dataset Investasi")
+    st.divider()
+
+    # Filter dan pencarian
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        filter_jenis = st.multiselect(
+            "Filter Jenis Aset:",
+            options=JENIS_LIST,
+            default=JENIS_LIST
+        )
+    with col2:
+        cari = st.text_input("Cari Nama Aset:", placeholder="Contoh: Bitcoin, BBCA...")
+    with col3:
+        sort_Kriteria = st.selectbox("📊 Urutkan Berdasarkan",
+            options=["No"] + KRITERIA_COLS,
+            format_func=lambda x: {"No": "No (Default)"}.get(x, x)
+        )
+
+    # Terapkan filter
+    df_Tampil = df_raw[df_raw["Jenis"].isin(filter_jenis)].copy()
+    if cari:
+        df_Tampil = df_Tampil[df_Tampil["Nama"].str.contains(cari, case=False, na=False)]
+    if sort_Kriteria != "No":
+        asc = (sort_Kriteria == "Volatilitas")  # Volatilitas: cost → urutkan ascending (kecil lebih baik)
+        df_Tampil = df_Tampil.sort_values(sort_Kriteria, ascending=asc)
+
+    st.markdown(
+        f"<div class='section-title'>📊 Tabel Dataset "
+        f"<span style='color:#7aa8d2; font-size:0.85rem; font-weight:400;'>"
+        f"({len(df_Tampil)} baris)</span></div>",
+        unsafe_allow_html=True
+    )
+
+    # Tampilkan tabel interaktif
+    st.dataframe(
+        df_Tampil.style
+            .format({"Return_Tahunan": "{:.2f}%", "Volatilitas": "{:.2f}%"})
+            .background_gradient(subset=["Return_Tahunan"], cmap="Blues")
+            .background_gradient(subset=["Volatilitas"],    cmap="Reds_r")
+            .background_gradient(subset=["Likuiditas", "Regulasi", "Kemudahan_Modal"], cmap="Greens"),
+        use_container_width=True,
+        height=450,
+    )
+
+    # Statistik deskriptif (opsional, bisa dibuka-tutup)
+    with st.expander("📊 Lihat Statistik Deskriptif"):
+        st.dataframe(df_raw[KRITERIA_COLS].describe().round(3), use_container_width=True)
+
+# ─────────────────────────────────────────────────────────────
+# HALAMAN 3: HITUNG SPK
+# ─────────────────────────────────────────────────────────────
+elif nav == "⚙︎ Hitung SPK":
+    st.title("⚙︎ Perhitungan SPK — Weighted Product")
+    st.divider()
+
+    # ── INPUT BOBOT (minimal 3 widget interaktif) ──
+    st.subheader("Atur Bobot Kriteria")
+    st.write("Geser slider untuk menentukan tingkat kepentingan setiap kriteria (nilai 1–10).")
+
+    col_bobot, col_normalisasi = st.columns([3, 2])
+
+    with col_bobot:
+        w1 = st.slider("Return Tahunan  [Benefit]",    1, 10, 5,
+                        help="Makin tinggi return, makin bagus")
+        w2 = st.slider("Volatilitas     [Cost]",       1, 10, 4,
+                        help="Makin rendah volatilitas, makin aman")
+        w3 = st.slider("Likuiditas      [Benefit]",    1, 10, 3,
+                        help="Makin mudah dicairkan, makin baik")
+        w4 = st.slider("Regulasi        [Benefit]",    1, 10, 3,
+                        help="Makin patuh regulasi, makin aman")
+        w5 = st.slider("Kemudahan Modal [Benefit]",    1, 10, 3,
+                        help="Makin mudah modalnya, makin baik")
+
+    # Hitung bobot ternormalisasi
+    bobot_asli = [w1, w2, w3, w4, w5]
+    total_bobot = sum(bobot_asli)
+    bobot_normal = [round(b / total_bobot, 4) for b in bobot_asli]
+
+    with col_normalisasi:
+        st.subheader("Bobot Ternormalisasi")
+        # Tampilkan tabel bobot
+        tabel_bobot = pd.DataFrame({
+            "Kriteria":    KRITERIA_LABEL,
+            "Tipe":        ["Benefit" if t == "benefit" else "Cost" for t in KRITERIA_TIPE],
+            "Bobot Asli":  bobot_asli,
+            "Bobot Normal":bobot_normal
+        })
+        st.dataframe(tabel_bobot, use_container_width=True, hide_index=True)
+        st.info(f"Total bobot normal: **{sum(bobot_normal):.4f}** (harus = 1.0)")
+
+    st.divider()
+
+    # ── PENGATURAN TAMBAHAN ──
+    st.subheader("⚙︎ Pengaturan Tambahan")
+    col_a, col_b, col_c = st.columns(3)
+    with col_a:
+        filter_jenis = st.multiselect(
+            "Jenis Aset yang Dianalisis:",
+            options=JENIS_LIST,
+            default=JENIS_LIST
+        )
+    with col_b:
+        top_n = st.selectbox(
+            "Tampilkan Top-N Hasil:",
+            options=[5, 10, 15, 20, 50, "Semua"],
+            index=2
+        )
+    with col_c:
+        tampil_langkah = st.selectbox(
+            "Tampilkan Langkah Perhitungan?",
+            options=["Ya", "Tidak"]
+        )
+
+    st.divider()
+
+    # ── TOMBOL HITUNG (wajib ada tombol, tidak otomatis) ──
+    tombol_hitung = st.button("HITUNG SPK — WEIGHTED PRODUCT", use_container_width=True, type="primary")
+
+    # Proses hanya berjalan kalau tombol diklik
+    if tombol_hitung:
+
+        # Filter data sesuai jenis aset yang dipilih
+        df_hitung = df_raw[df_raw["Jenis"].isin(filter_jenis)].copy().reset_index(drop=True)
+
+        if len(df_hitung) == 0:
+            st.error("Tidak ada data! Pilih minimal 1 jenis aset.")
+            st.stop()
+
+        with st.spinner("Sedang menghitung..."):
+
+            # ── LANGKAH 1: Ambil Matriks Nilai (X) ──
+            # X adalah tabel angka nilai kriteria semua aset
+            # Baris = aset, Kolom = kriteria
+            X = df_hitung[KRITERIA_COLS].values.astype(float)
+
+            # Pastikan semua nilai > 0 (WP tidak bisa hitung 0 atau negatif)
+            for j in range(X.shape[1]):
+                if X[:, j].min() <= 0:
+                    X[:, j] = X[:, j] - X[:, j].min() + 0.001  # geser agar semua positif
+
+        if tampil_langkah == "Ya":
+            st.subheader("Langkah 1 — Matriks Keputusan (X)")
+            st.write("Nilai kriteria setiap aset (10 baris pertama):")
+            tabel_X = pd.DataFrame(X[:10], columns=KRITERIA_LABEL, index=df_hitung["Nama"][:10])
+            st.dataframe(tabel_X.round(4), use_container_width=True)
+            st.caption("Hanya ditampilkan 10 baris pertama.")
+
+        if tampil_langkah == "Ya":
+            st.subheader("Langkah 2 — Bobot (W)")
+            st.write("Bobot yang sudah dinormalisasi:")
+            st.dataframe(tabel_bobot, use_container_width=True, hide_index=True)
+
+        # ── LANGKAH 3: Hitung Vektor S ──
+        # S_i = perkalian semua (nilai ^ bobot) untuk setiap aset
+        # Kalau benefit: nilai ^ (+bobot)  → makin besar makin bagus
+        # Kalau cost:    nilai ^ (-bobot)  → makin kecil makin bagus
+        W = np.array(bobot_normal)
+        S = np.ones(len(df_hitung))   # mulai dari 1.0 (karena akan dikalikan)
+
+        for j, (w, tipe) in enumerate(zip(W, KRITERIA_TIPE)):
+            if tipe == "benefit":
+                S *= X[:, j] ** w     # pangkat positif → nilai besar = lebih baik
+            else:
+                S *= X[:, j] ** (-w)  # pangkat negatif → nilai kecil = lebih baik
+
+        if tampil_langkah == "Ya":
+            st.subheader("Langkah 3 — Vektor S")
+            st.write("Skor sementara setiap aset (hasil perkalian berbobot):")
+            tabel_S = pd.DataFrame({
+                "Nama Aset": df_hitung["Nama"],
+                "Jenis":     df_hitung["Jenis"],
+                "Nilai S_i": S
+            })
+            st.dataframe(
+                tabel_S.style.format({"Nilai S_i": "{:.8f}"}),
+                use_container_width=True, hide_index=True, height=300
+            )
+
+        # ── LANGKAH 4: Hitung Vektor V ──
+        # V_i = S_i dibagi total semua S → menghasilkan skor akhir antara 0 dan 1
+        V = S / S.sum()
+
+        if tampil_langkah == "Ya":
+            st.subheader("Langkah 4 — Vektor V (Nilai Preferensi Akhir)")
+            st.write("Skor akhir setiap aset (total semua V = 1.0):")
+            tabel_V = pd.DataFrame({
+                "Nama Aset": df_hitung["Nama"],
+                "Jenis":     df_hitung["Jenis"],
+                "Nilai S_i": S,
+                "Nilai V_i": V,
+                "V_i (%)":   V * 100
+            })
+            st.dataframe(
+                tabel_V.style.format({
+                    "Nilai S_i": "{:.8f}",
+                    "Nilai V_i": "{:.8f}",
+                    "V_i (%)":  "{:.5f}%"
+                }),
+                use_container_width=True, hide_index=True, height=300
+            )
+
+        # ── LANGKAH 5: Buat Tabel Ranking ──
+        df_hasil = df_hitung.copy()
+        df_hasil["Skor_S"]    = S
+        df_hasil["Skor_V"]    = V
+        df_hasil["Peringkat"] = df_hasil["Skor_V"].rank(ascending=False).astype(int)
+        df_hasil = df_hasil.sort_values("Peringkat").reset_index(drop=True)
+
+        # Simpan hasil agar bisa dipakai di halaman Visualisasi
+        st.session_state["df_result"] = df_hasil
+
+        # ── Tampilkan Tabel Hasil ──
+        st.success("✅ Perhitungan selesai!")
+        st.divider()
+
+        jumlah_tampil = len(df_hasil) if top_n == "Semua" else int(top_n)
+        st.subheader(f"Hasil Perangkingan — Top {jumlah_tampil}")
+
+        df_top = df_hasil.head(jumlah_tampil).copy()
+
+        # Buat fungsi emoji medali untuk peringkat 1-3
+        def beri_medali(r):
+            if r == 1:   return "🥇 #1"
+            elif r == 2: return "🥈 #2"
+            elif r == 3: return "🥉 #3"
+            return f"#{r}"
+
+        # Tabel hasil yang ditampilkan ke user
+        df_Tampil_hasil = pd.DataFrame({
+            "Peringkat":       df_top["Peringkat"].apply(beri_medali),
+            "Nama Aset":       df_top["Nama"],
+            "Jenis":           df_top["Jenis"],
+            "Return (%)":      df_top["Return_Tahunan"].round(2),
+            "Volatilitas (%)": df_top["Volatilitas"].round(2),
+            "Likuiditas":      df_top["Likuiditas"],
+            "Regulasi":        df_top["Regulasi"],
+            "Kemudahan Modal": df_top["Kemudahan_Modal"],
+            "Skor V":          df_top["Skor_V"].round(8),
+        })
+
+        st.dataframe(
+            df_Tampil_hasil.style
+                .background_gradient(subset=["Skor V", "Likuiditas", "Regulasi", "Kemudahan Modal"], cmap="Greens")
+                .background_gradient(subset=["Return (%)"], cmap="Blues")
+                .background_gradient(subset=["Volatilitas (%)"], cmap="Reds_r"),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+        # ── Podium Top 3 ──
+        st.divider()
+        st.subheader("🎖️ Rekomendasi Terbaik")
+        col_1, col_2, col_3 = st.columns(3)
+        podium = [col_1, col_2, col_3]
+        medali = ["🥇 1st Best", "🥈 2nd Best", "🥉 3rd Best"]
+
+        for i, (kolom, (_, baris)) in enumerate(zip(podium, df_hasil.head(3).iterrows())):
+            with kolom:
+                st.subheader(medali[i])
+                st.write(f"**{baris['Nama']}**")
+                st.write(f"Jenis: {baris['Jenis']}")
+                st.write(f"Skor V: `{baris['Skor_V']:.8f}`")
+                st.write(f"Return: {baris['Return_Tahunan']:.2f}% | Volatilitas: {baris['Volatilitas']:.2f}%")
+
+# ─────────────────────────────────────────────────────────────
+# HALAMAN 4: VISUALISASI
+# ─────────────────────────────────────────────────────────────
+elif nav == "↗ Visualisasi":
+    st.title("↗ Visualisasi Data")
+    st.caption("Eksplorasi data investasi menggunakan grafik")
+    st.divider()
+
+    # ── Grafik 1: Scatter Plot Return vs Volatilitas ──
+    st.subheader("Grafik 1: Return vs Volatilitas")
+    st.write("Aset ideal berada di **kiri atas**: Return tinggi & Volatilitas rendah.")
+
+    fig1, ax1 = plt.subplots(figsize=(10, 5))
+    for jenis in JENIS_LIST:
+        sub = df_raw[df_raw["Jenis"] == jenis]
+        ax1.scatter(sub["Volatilitas"], sub["Return_Tahunan"], label=jenis, s=60, alpha=0.7)
+    ax1.axhline(0, color='red', linestyle='--', alpha=0.5, label='Return = 0%')
+    ax1.set_xlabel("Volatilitas (%)")
+    ax1.set_ylabel("Return Tahunan (%)")
+    ax1.set_title("Return vs Volatilitas per Aset")
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
+    st.pyplot(fig1)
+    plt.close()
+
+    st.divider()
+
+    # ── Grafik 2: Bar chart rata-rata skor kriteria per jenis ──
+    st.subheader("Grafik 2: Rata-rata Skor Kriteria")
+    rata_rata = df_raw.groupby("Jenis")[["Return_Tahunan","Volatilitas","Likuiditas", "Regulasi", "Kemudahan_Modal"]].mean()
+    fig3, ax3 = plt.subplots(figsize=(6, 4))
+    rata_rata.plot(kind="bar", ax=ax3, alpha=0.8)
+    ax3.set_title("Rata-rata Skor Kriteria per Jenis")
+    ax3.set_xlabel("Jenis Aset")
+    ax3.set_ylabel("Nilai X Bobot")
+    ax3.set_xticklabels(ax3.get_xticklabels(), rotation=15)
+    ax3.legend(loc="upper right")
+    ax3.grid(True, alpha=0.3)
+    st.pyplot(fig3)
+    plt.close()
+
+    st.divider()
+
+    # ── Grafik 3: Hasil Ranking (hanya muncul kalau sudah hitung) ──
+    if "df_result" in st.session_state:
+        st.subheader("Grafik 3: Hasil Perangkingan SPK — Top 20")
+        df_res = st.session_state["df_result"].head(20)
+        fig5, ax5 = plt.subplots(figsize=(10, 7))
+        ax5.barh(range(len(df_res)), df_res["Skor_V"].values, alpha=0.8)
+        ax5.set_yticks(range(len(df_res)))
+        ax5.set_yticklabels([f"#{i+1}  {n}" for i, n in enumerate(df_res["Nama"])], fontsize=8)
+        ax5.set_xlabel("Skor V (Nilai Preferensi)")
+        ax5.set_title("Peringkat Aset Investasi — Skor WP")
+        ax5.invert_yaxis()  # Peringkat 1 di atas
+        ax5.grid(True, alpha=0.3)
+        st.pyplot(fig5)
+        plt.close()
+    else:
+        st.info("Jalankan perhitungan di halaman ** Hitung SPK** dulu untuk melihat grafik ranking.")
