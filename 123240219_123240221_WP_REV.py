@@ -45,7 +45,7 @@ st.markdown("""
 # ── Load dataset ──────────────────────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    df = pd.read_csv("crypto_criteria.csv")
+    df = pd.read_csv("CRYPTO_DATASET.csv")
     df = df[["Crypto", "Close", "Volume", "Market Cap", "Return", "Volatility"]].copy()
     df.columns = ["Crypto", "Close", "Volume", "Market_Cap", "Return", "Volatility"]
     return df
